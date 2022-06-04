@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('datadiris', function (Blueprint $table) {
             $table->id();
+            $table->string('nama', 100);
+            $table->string('npm', 10);
+            $table->integer('semester');    
+            $table->string('jurusan', 20);
             $table->timestamps();
         });
     }
