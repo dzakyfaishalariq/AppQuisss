@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\datadiri;
+use App\Models\Soal;
+use App\Models\jawaban;
 use Illuminate\Http\Request;
 
 class datadiriController extends Controller
@@ -101,7 +103,19 @@ class datadiriController extends Controller
         $data = datadiri::where('nama', $nama)->where('npm', $npm)->first();
         if ($data) {
             //jika ada maka akan menampilkan data
-            return view('quis', ['title' => 'Quis', 'data' => $data]);
+            $data_soal = Soal::all();
+            //$data_jawaban = jawaban::all();
+            //mengambil data pertama
+            //$soal1 = $data_soal->first();
+            //mengambil data kedua
+            return view(
+                'quis',
+                [
+                    'data_soal' => $data_soal,
+                    'data' => $data,
+                    'title' => 'Quis'
+                ]
+            );
         } else {
             //jika tidak ada maka akan menampilkan pesan
             return redirect('/isidata')->with('status', 'Data tidak ditemukan silahkan daftar terlebih dahulu');
