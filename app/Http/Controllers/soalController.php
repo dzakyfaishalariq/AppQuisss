@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Soal;
-use App\Models\jawaban;
 use Illuminate\Http\Request;
+use App\Models\datadiri;
 
 class soalController extends Controller
 {
@@ -81,7 +81,17 @@ class soalController extends Controller
      */
     public function update(Request $request, Soal $soal)
     {
-        //
+        //ubah data
+        $soal->soal = $request->soal;
+        $soal->pil1 = $request->pil_a;
+        $soal->pil2 = $request->pil_b;
+        $soal->pil3 = $request->pil_c;
+        $soal->pil4 = $request->pil_d;
+        $soal->jawaban = $request->jawaban;
+        //simpan data
+        $soal->save();
+        // memberikan pesan sudah tersimpan
+        return redirect('/buatSoal')->with('status2', 'Data berhasil diubah');
     }
 
     /**
@@ -127,17 +137,44 @@ class soalController extends Controller
         //$data1 = $request->all()['jaw1'];
         //menampilkan data pertama di request berbentuk string
         //===============================
+        $nama = $request->nama;
+        $npm = $request->npm;
+        $semester = $request->semester;
+        $jurusan = $request->jurusan;
         $jumlah_nilai = 0;
         $index = 1;
         $data_soal = Soal::all();
         foreach ($data_soal as $soal) {
             if ($request->{'jaw' . $index} == $soal->jawaban) {
-                $jumlah_nilai += 20;
+                $jumlah_nilai += 10;
             } else {
-                $jumlah_nilai += 0;
+                $jumlah_nilai -= 2;
             }
             $index++;
         }
-        return view('tess', compact('jumlah_nilai'));
+        // rata rata nilai
+        //banyak data soal
+        $banyak_soal = Soal::count();
+        $rata_rata = $jumlah_nilai / $banyak_soal;
+        if ($rata_rata >= 9) {
+            $status = "A";
+        } elseif ($rata_rata >= 8) {
+            $status = "B";
+        } elseif ($rata_rata >= 7) {
+            $status = "C";
+        } elseif ($rata_rata >= 6) {
+            $status = "D";
+        } else {
+            $status = "E";
+        }
+        $title = 'Hasil Quis';
+        return view('hasilTess', compact('jumlah_nilai', 'title', 'nama', 'npm', 'semester', 'jurusan', 'status'));
+    }
+    public function delete(Soal $soal)
+    {
+        //hapus data
+        $soal->delete();
+        // memberikan pesan sudah tersimpan
+        return redirect('/buatSoal')->with('status3', 'Data berhasil dihapus');
     }
 }

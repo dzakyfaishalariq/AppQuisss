@@ -82,7 +82,17 @@ class datadiriController extends Controller
      */
     public function update(Request $request, datadiri $datadiri)
     {
-        //
+        //ubah data
+        $datadiri->nama = $request->nama;
+        $datadiri->npm = $request->npm;
+        //ubah string ke integer
+        $semester = $request->semester;
+        $datadiri->semester = (int)$semester;
+        $datadiri->jurusan = $request->jurusan;
+        //simpan data
+        $datadiri->save();
+        // memberikan pesan sudah tersimpan
+        return redirect('/tabeldatadiri')->with('status', 'Data berhasil diubah');
     }
 
     /**
@@ -120,5 +130,12 @@ class datadiriController extends Controller
             //jika tidak ada maka akan menampilkan pesan
             return redirect('/isidata')->with('status', 'Data tidak ditemukan silahkan daftar terlebih dahulu');
         }
+    }
+    public function delete(datadiri $datadiri)
+    {
+        //hapus data
+        $datadiri->delete();
+        // memberikan pesan sudah tersimpan
+        return redirect('/tabeldatadiri')->with('status2', 'Data berhasil dihapus');
     }
 }

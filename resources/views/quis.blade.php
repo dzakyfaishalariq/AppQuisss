@@ -7,6 +7,12 @@
             <h3>Lembar Soal</h3>
         </div>
         <div class="card-body">
+            <h4>Identitas</h4>
+            <p>Nama : {{ $data->nama }}</p>
+            <p>Npm : {{ $data->npm }}</p>
+            <p>Semester : {{ $data->semester }}</p>
+            <p>Jurusan : {{ $data->jurusan }}</p>
+            <hr>
             <form action="/kelolajawaban" method="post">
                 @csrf
                 <div class="row">
@@ -45,7 +51,12 @@
                     @endforeach
                 </div>
                 <hr>
+                <input type="hidden" name="nama" value="{{ $data->nama }}">
+                <input type="hidden" name="npm" value="{{ $data->npm }}">
+                <input type="hidden" name="semester" value="{{ $data->semester }}">
+                <input type="hidden" name="jurusan" value="{{ $data->jurusan }}">
                 <button type="submit" class="btn btn-primary">Selesai</button>
+                <a href="/" class=" btn btn-primary">Batalkan quis</a>
             </form>
         </div>
     </div>
