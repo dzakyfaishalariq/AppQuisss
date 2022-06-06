@@ -31,15 +31,20 @@
                         <td>{{$item->semester}}</td>
                         <td>{{$item->jurusan}}</td>
                         <td>
+                            <!---
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 Edit
                             </button>
+                            --->
+                            <a href="/tampilkaneditdatadiri/{{ $item->id }}" class="btn btn-warning">edit</a>
                             <a href="/hapusdatadiri/{{ $item->id }}" class="btn btn-danger">Hapus</a>
+                            <!----
                             <button type="button" class="btn btn-primary" id="liveToastBtn">Info</button>
+                            --->
                             <!---<button class="btn btn-info" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">Info</button>--->
                         </td>
                     </tr>
-                    <!----area ----->
+                    <!----area 
                     <div class="toast-container position-fixed bottom-0 end-0 p-3">
                         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
                         <div class="toast-header bg-danger text-white">
@@ -68,7 +73,8 @@
                             })
                         }
                     </script>
-                    <!----end ------>
+                    ------>
+                    <!------
                         <form action="/editdatadiri/{{ $item->id }}" method="post">
                             @csrf
                             @method('PUT')
@@ -114,6 +120,7 @@
                                     </div>
                                 </div>
                         </form>
+                    --->
                     @endforeach
                 </tbody>
             </table>

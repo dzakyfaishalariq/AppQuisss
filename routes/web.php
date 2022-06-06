@@ -40,6 +40,7 @@ Route::post('/validasitoken', [datadiriController::class, 'validasi']);
 Route::post('/tambahsoal', [soalController::class, 'store']);
 Route::post('/kelolajawaban', [soalController::class, 'area_quis']);
 Route::put('/editsoal/{soal}', [soalController::class, 'update']);
+Route::get('/tampilkaneditdatadiri/{datadiri}', [datadiriController::class, 'edit']);
 Route::put('/editdatadiri/{datadiri}', [datadiriController::class, 'update']);
 Route::get('/hapusdatadiri/{datadiri}', [datadiriController::class, 'delete']);
 Route::get('/hapussoal/{soal}', [soalController::class, 'delete']);

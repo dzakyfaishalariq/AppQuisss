@@ -70,7 +70,10 @@ class datadiriController extends Controller
      */
     public function edit(datadiri $datadiri)
     {
-        //
+        //menampilkan data untuk di edit
+        $data = $datadiri;
+        $title = 'Edit Data';
+        return view('/editdatadiri', compact('data', 'title'));
     }
 
     /**
